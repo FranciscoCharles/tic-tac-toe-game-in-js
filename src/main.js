@@ -2,22 +2,23 @@ function main() {
 
 	const all_images = document.querySelectorAll('img')
 	const text_player = document.querySelectorAll('.text-container')
-	let player_1 = true
+	let is_player_one = true
 	let play_counter = 0
 
 	text_player[0].style.color = 'white'
+
 	function tooglePlayer() {
-		text_player[Number(player_1)].style.color = 'white'
-		player_1 = !player_1
-		text_player[Number(player_1)].style.color = 'black'
+		text_player[Number(is_player_one)].style.color = 'white'
+		is_player_one = !is_player_one
+		text_player[Number(is_player_one)].style.color = 'black'
 	}
-	function resete_game() {
+	function reset_game() {
 		all_images.forEach(img => {
 			img.dataset.check = ""
 			img.src = 'asserts/empty.png'
 		})
 
-		player_1 = true
+		is_player_one = true
 		play_counter = 0
 	}
 
@@ -26,14 +27,14 @@ function main() {
 		img.addEventListener('click', () => {
 			if (img.dataset.check === "") {
 				img.dataset.check = true
-				img.src = player_1 ? 'asserts/x.png' : 'asserts/o.png'
+				img.src = is_player_one ? 'asserts/x.png' : 'asserts/o.png'
+
 				tooglePlayer()
 				play_counter++
 				if (play_counter === 9) {
-					resete_game()
+					reset_game()
 				}
 			}
-
 		})
 	})
 }
