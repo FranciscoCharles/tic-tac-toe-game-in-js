@@ -1,0 +1,66 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: rgba(100, 100, 100, 0.178);
+    width: 100vw;
+    height: 100vh;
+}
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.container-jogador{
+    width: 320px;
+    height: 80px;
+    display: flex;
+    justify-content: space-around;
+    
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    background-color: rgb(92,92,92);
+}
+.text-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    width: 100%;
+    height: 100%;
+
+    text-align: center;
+    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color:black;
+}
+.tabuleiro{
+    background-color: black;
+    border-bottom-left-radius: 28px;
+    border-bottom-right-radius: 28px;
+}
+.tabuleiro-grid{
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+img{
+    padding: 10px;
+    display: block;
+    width: 100px;
+    height: 100px;
+    background-color: white;
+}
+img[data-item=left]{
+    border-bottom-left-radius: 25px;
+}
+img[data-item=right]{
+    border-bottom-right-radius: 25px;
+}
