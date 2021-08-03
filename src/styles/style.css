@@ -41,12 +41,12 @@ body{
     font-weight: bold;
     color:black;
 }
-.tabuleiro{
+.board{
     background-color: black;
     border-bottom-left-radius: 28px;
     border-bottom-right-radius: 28px;
 }
-.tabuleiro-grid{
+.board-grid{
     display: grid;
     gap: 10px;
     grid-template-columns: 1fr 1fr 1fr;
