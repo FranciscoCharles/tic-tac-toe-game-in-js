@@ -6,6 +6,7 @@
 <p align="justify">
 
 This is just a simple example of the Tic Tac Toe game made only with **HTML**, basic **CSS** and pure **Javascript** (Vanilla JS).
+As a challenge this game has an implementation of the minimax algorithm to select the best move.
 
 </p>
 
