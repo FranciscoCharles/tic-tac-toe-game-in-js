@@ -29,7 +29,7 @@ As a challenge this game has an implementation of the minimax algorithm to selec
  Download the project, go to the `src` folder and open the `index.html` file in a browser like Firefox or Chrome.
 
 # **<a name=version>Version</a>**  <h6>[back to indice](#index)</h6>
-- current version of the project: 0.2.1.
+- current version of the project: 0.8.3.
 
 # **<a name=license>License</a>**  <h6>[back to indice](#index)</h6>
 
