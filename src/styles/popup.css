@@ -1,0 +1,86 @@
+.modal { 
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: rgba(0, 0, 0,0.5);
+    cursor: pointer;
+    transition: all 0.35s ease-in;
+}
+.modal-dialog {
+    position: relative;
+    max-width: 800px;
+    max-height: 80vh;
+    border-radius: 15px;
+    background: white;
+    overflow: auto;
+    cursor: default;
+    border-radius: 25px;
+}
+.close-modal{
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: inherit;
+    width: 30px;
+}
+.close-modal:hover{
+    background-color: rgba(255,255,255,0.8);
+    border-radius: 25px;
+}
+.modal-header,
+.modal-footer {
+    background: rgb(92,92,92);
+    width: 500px;
+    min-height: 20px;
+    font-size: 25px;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    color:rgba(255,255,255,0.8);
+}
+.modal-header {
+    display: flex;
+    align-items: center;
+}
+.modal-header h3{
+    width: 90%;
+}
+.modal-header .modal-close {
+    font-size: 1.5rem;
+}
+.modal-content{
+    height: 100px;
+    font-family: 'Courier New', Courier, monospace;
+}
+.modal-text{
+    height: 60%;
+    width: 100%;
+    text-align: center;
+}
+.popup-buttons{
+    display: flex;
+    justify-content: center;
+    height: 30%;
+}
+.popup-buttons button{
+    width: 120px;
+    height: 30px;
+    border-style: solid;
+    border-radius: 10px;
+}
+.popup-buttons button:hover{
+    background-color: rgba(92,92,92,0.5);
+}
+button[data-btn-p1]{
+    margin-right: 20px;
+}
+button[data-btn-p2]{
+    margin-left: 20px;
+}
