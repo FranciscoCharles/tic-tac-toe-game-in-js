@@ -1,13 +1,24 @@
 function main() {
 
 	let tictactoe = new TicTacToe()
+	const btn_continue_game = document.querySelector('button[data-btn-p1]')
+	const btn_back_menu = document.querySelector('button[data-btn-p2]')
+	const popup_modal = document.querySelector('.modal')
+	const popup_close_btn = document.querySelector('.close-modal')
 
-	function finishMessageBox(message) {
-		message += '\nWant to play again on this difficulty?'
-		if (!confirm(message)) {
-			toogleElementOfGame()
-		}
-	}
+	popup_close_btn.addEventListener('click', () => {
+		popup_modal.style.display = 'none'
+		tictactoe.resetGame()
+	})
+	btn_continue_game.addEventListener('click', () => {
+		popup_modal.style.display = 'none'
+		tictactoe.resetGame()
+	})
+	btn_back_menu.addEventListener('click', () => {
+		popup_modal.style.display = 'none'
+		toogleElementOfGame()
+		tictactoe.resetGame()
+	})
 
 	function computerMove() {
 		const random = Math.random()
@@ -29,15 +40,13 @@ function main() {
 					? 'Congratulations, you tied!'
 					: 'You lost!'
 			)
-			tictactoe.resetGame()
+
 		} else if (winner == 'x') {
 			finishMessageBox('Congratulations you won!')
-			tictactoe.resetGame()
 		} else {
 			computerMove()
 			if (tictactoe.getWinner() === 'o') {
 				finishMessageBox('You lost!')
-				tictactoe.resetGame()
 			}
 		}
 	}

@@ -1,6 +1,7 @@
 .container-menu{
     background-color: rgb(92,92,92);
-    min-height: 240px;
+
+    min-height: 320px;
     width: 35vw;
     min-width: 360px;
     border-radius: 25px 25px 25px 25px;
@@ -12,14 +13,14 @@
     text-align: center;
     color: rgba(255,255,255,0.8);
 }
-.menu{
+.menu, .menu-pxp-button{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.menu > button{
-    width: 33vw;
+.menu > button, .menu-pxp-button > button{
+    width: 30vw;
     min-width: 340px;
     height: 2.5rem;
     font-size: 2rem;
@@ -28,7 +29,10 @@
     border: 1px solid rgba(0, 0, 0, 0.6);
     color:rgba(0, 0, 0, 0.8);
 }
-.menu > button:hover{
+button[data-id='pxp']{
+    border-radius: 12px;
+}
+.menu > button:hover, .menu-pxp-button > button:hover{
     background-color: rgb(158, 158, 158);
 }
 .menu > button:first-child{
