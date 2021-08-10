@@ -20,17 +20,14 @@ function main() {
 	function playerVsComputer() {
 		tictactoe.tooglePlayer()
 		let winner = tictactoe.getWinner()
-		if (winner === 'tie' || winner === 'o') {
-			tictactoe.tooglePlayer()
-			finishMessageBox(
-				winner === 'tie'
-					? 'Congratulations, you tied!'
-					: 'You lost!'
-			)
-
+		if (winner === 'tie') {
+			finishMessageBox('Congratulations, you tied!')
+		} else if (winner === 'o') {
+			finishMessageBox('You lost!')
 		} else if (winner == 'x') {
 			finishMessageBox('Congratulations you won!')
 		} else {
+			tictactoe.tooglePlayer()
 			computerMove()
 			if (tictactoe.getWinner() === 'o') {
 				finishMessageBox('You lost!')
