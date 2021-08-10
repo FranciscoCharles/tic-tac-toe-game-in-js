@@ -1,6 +1,7 @@
 let is_game = false
 let DIFFICULTY = null
-let probability_of_difficulty = {
+let current_game = 'PLAYER_VS'
+const probability_of_difficulty = {
 	Easy: 0.3,
 	Medium: 0.6,
 	Difficult: 0.8,
@@ -10,6 +11,7 @@ let probability_of_difficulty = {
 const toogleElementOfGame = function () {
 
 	const buttons = document.querySelectorAll('.menu > button')
+	const p_vs_p_btn = document.querySelector('.menu-pxp-button')
 	const container_player = document.querySelector('.container-player')
 	const board_element = document.querySelector('.board')
 	const container_menu = document.querySelector('.container-menu')
@@ -29,9 +31,14 @@ const toogleElementOfGame = function () {
 
 	buttons.forEach(btn => {
 		btn.addEventListener('click', _ => {
-			DIFFICULTY = btn.textContent;
+			DIFFICULTY = btn.textContent
+			current_game = 'COMPUTER_VS'
 			toogleStyle()
 		})
+	})
+	p_vs_p_btn.addEventListener('click', _ => {
+		current_game = 'PLAYER_VS'
+		toogleStyle()
 	})
 
 	return toogleStyle

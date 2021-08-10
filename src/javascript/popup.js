@@ -4,7 +4,7 @@ const finishMessageBox = function () {
 
 	function changeMessage(message) {
 		message = '<p>' + message + '</p>\n'
-		message += '<p>Want to play again on this difficulty?<p>'
+		message += '<p>do you want to play again?<p>'
 		text_element.innerHTML = message
 		popup_modal.style.display = 'flex'
 	}

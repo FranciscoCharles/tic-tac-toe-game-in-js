@@ -1,24 +1,11 @@
 function main() {
 
 	let tictactoe = new TicTacToe()
+
 	const btn_continue_game = document.querySelector('button[data-btn-p1]')
 	const btn_back_menu = document.querySelector('button[data-btn-p2]')
 	const popup_modal = document.querySelector('.modal')
 	const popup_close_btn = document.querySelector('.close-modal')
-
-	popup_close_btn.addEventListener('click', () => {
-		popup_modal.style.display = 'none'
-		tictactoe.resetGame()
-	})
-	btn_continue_game.addEventListener('click', () => {
-		popup_modal.style.display = 'none'
-		tictactoe.resetGame()
-	})
-	btn_back_menu.addEventListener('click', () => {
-		popup_modal.style.display = 'none'
-		toogleElementOfGame()
-		tictactoe.resetGame()
-	})
 
 	function computerMove() {
 		const random = Math.random()
@@ -50,13 +37,32 @@ function main() {
 			}
 		}
 	}
+
+	function playerVsPlayer() {
+		let winner = tictactoe.getWinner()
+		if (winner === 'tie') {
+			finishMessageBox('tied game!')
+		} else if (winner == 'x') {
+			finishMessageBox('Player 1 won!')
+		} else if (winner === 'o') {
+			finishMessageBox('Player 2 won!')
+		} else {
+			tictactoe.tooglePlayer()
+		}
+	}
+
+	const CALLBACK_TYPE_GAME = {
+		PLAYER_VS: playerVsPlayer,
+		COMPUTER_VS: playerVsComputer
+	}
+
 	function addEventImages() {
 		const PLAYER = 'x'
 		const COMPUTER = 'o'
 
 		tictactoe.board.forEach(function addEventClickInImage(img) {
 
-			img.addEventListener('click', function eventClick() {
+			img.addEventListener('click', function eventClickBoard() {
 				if (img.dataset.check === '') {
 					if (tictactoe.is_player_one) {
 						img.dataset.check = PLAYER
@@ -65,11 +71,25 @@ function main() {
 						img.dataset.check = COMPUTER
 						img.src = 'asserts/o.png'
 					}
-					playerVsComputer()
+					CALLBACK_TYPE_GAME[current_game]()
 				}
 			})
 		})
 	}
+
+	popup_close_btn.addEventListener('click', () => {
+		popup_modal.style.display = 'none'
+		tictactoe.resetGame()
+	})
+	btn_continue_game.addEventListener('click', () => {
+		popup_modal.style.display = 'none'
+		tictactoe.resetGame()
+	})
+	btn_back_menu.addEventListener('click', () => {
+		popup_modal.style.display = 'none'
+		toogleElementOfGame()
+		tictactoe.resetGame()
+	})
 
 	addEventImages()
 
