@@ -1,8 +1,12 @@
+const PATH_IMG_X = 'asserts/x.png'
+const PATH_IMG_O = 'asserts/o.png'
+const PATH_IMG_EMPTY = 'asserts/empty.png'
+
 class TicTacToe {
 
 	constructor() {
 
-		this.board = document.querySelectorAll('img')
+		this.board = Array.from(document.querySelectorAll('img'))
 		this.text_player = document.querySelectorAll('.text-container')
 		this.PLAYER = 'x'
 		this.COMPUTER = 'o'
@@ -12,20 +16,11 @@ class TicTacToe {
 	}
 
 	isTie() {
-		let tie = true
-		for (let row = 0; row < 3 && tie; row++) {
-			for (let column = 0; column < 3; column++) {
-				let element = this.board[row * 3 + column]
-				if (element.dataset.check === '') {
-					tie = false
-					break
-				}
-			}
-		}
-		return tie
+		return this.board.every(({ dataset }) => dataset.check !== '')
 	}
 
 	isWinner(player) {
+
 		if (this.board[0].dataset.check === player
 			&& this.board[1].dataset.check === player
 			&& this.board[2].dataset.check === player) {
@@ -56,6 +51,7 @@ class TicTacToe {
 			&& this.board[8].dataset.check === player) {
 			return true
 		}
+
 		if (this.board[0].dataset.check === player
 			&& this.board[4].dataset.check === player
 			&& this.board[8].dataset.check === player) {
@@ -100,19 +96,14 @@ class TicTacToe {
 			best_score = -Infinity
 			next_player = this.PLAYER
 		}
-
-		for (let row = 0; row < 3; row++) {
-			for (let column = 0; column < 3; column++) {
-				let element = this.board[row * 3 + column]
-				if (element.dataset.check === '') {
-					element.dataset.check = current_player
-
-					let score = this.miniMax(next_player, depth + 1)
-					element.dataset.check = ''
-					best_score = callback(best_score, score)
-				}
+		this.board.forEach(({ dataset }) => {
+			if (dataset.check === '') {
+				dataset.check = current_player
+				let score = this.miniMax(next_player, depth + 1)
+				dataset.check = ''
+				best_score = callback(best_score, score)
 			}
-		}
+		})
 		return best_score
 	}
 	tooglePlayer() {
@@ -125,50 +116,42 @@ class TicTacToe {
 		let best_move = null
 		let best_score = -Infinity
 
-		for (let row = 0; row < 3; row++) {
-			for (let column = 0; column < 3; column++) {
+		this.board.forEach(({ dataset }, index) => {
+			if (dataset.check === '') {
 
-				let element = this.board[row * 3 + column]
-				if (element.dataset.check === '') {
+				dataset.check = this.COMPUTER
+				let score = this.miniMax()
+				dataset.check = ''
 
-					element.dataset.check = this.COMPUTER
-
-					let score = this.miniMax()
-					element.dataset.check = ''
-					if (score > best_score) {
-						best_score = score
-						best_move = row * 3 + column
-					}
+				if (score > best_score) {
+					best_score = score
+					best_move = index
 				}
 			}
-		}
-		let element = this.board[best_move]
-		element.src = 'asserts/o.png'
+		})
+		this.setComputerPosition(best_move)
+	}
+
+	setComputerPosition(index) {
+		let element = this.board[index]
+		element.src = PATH_IMG_O
 		element.dataset.check = this.COMPUTER
 		this.tooglePlayer()
 	}
+
 	computerRandomMove() {
 
-		let move_array = []
-		for (let row = 0; row < 3; row++) {
-			for (let column = 0; column < 3; column++) {
-
-				let element = this.board[row * 3 + column]
-				if (element.dataset.check === '') {
-					move_array.push(row * 3 + column)
-				}
-			}
-		}
-		let index = move_array[Math.floor(Math.random() * move_array.length)]
-		let element = this.board[index]
-		element.src = 'asserts/o.png'
-		element.dataset.check = this.COMPUTER
-		this.tooglePlayer()
+		let empty_positions = this.board.reduce((acc, { dataset }, index) => {
+			if (dataset.check === '') acc.push(index)
+			return acc
+		}, [])
+		let index = empty_positions[Math.floor(Math.random() * empty_positions.length)]
+		this.setComputerPosition(index)
 	}
 	resetGame() {
 		this.board.forEach(img => {
 			img.dataset.check = ''
-			img.src = 'asserts/empty.png'
+			img.src = PATH_IMG_EMPTY
 		})
 		this.is_player_one = true
 		this.text_player[0].style.color = 'white'
